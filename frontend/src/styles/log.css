@@ -1,0 +1,59 @@
+.connection-form {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+.shape1 {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    border-radius: 50%;
+    background: #FFD7D7;
+    left: -80px;
+    top: -80px;
+}
+
+.shape2 {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+    background: #FD2D01 ;
+    right: -30px;
+    bottom: -80px;
+}
+
+.form-container {
+    height: 520px;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.13);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+}
+
+.bt-login-logup {
+    display: flex;
+    justify-content: space-around;
+}
+
+.bt-login-logup div {
+    cursor: pointer;
+          border-radius: 20px;
+          padding: 10px 20px;
+          transition: 0.2s;
+}
+
+.active-btn {
+    background-color: rgba(255, 255, 255, 0.47);
+}

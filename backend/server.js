@@ -22,7 +22,7 @@ const normalizePort = val => {
   return false;
 };
 //* define the port that the server is listening
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '4200');
 app.set('port', process.env.PORT);
 
 //* function to handle error from the server

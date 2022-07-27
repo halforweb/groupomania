@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 
 //* import the routes related to publication and user 
 const publicationRoutes = require('./routes/publication');
@@ -37,12 +38,15 @@ app.use((req, res, next) => {
     next();
 });
 
-//* define the middleware functions to be applied on the application
+//* define the middleware functions to be applied on the application - Tech
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); //* secure headers allowing cross origin resource display
 app.use(express.json()); //* parse incoming request with json
+app.use(cookieParser()); //$ parse incoming cookie with CookieParser
+
+//* define the middleware functions to be applied on the application - Business Logic
 app.use('/images', express.static(path.join(__dirname, 'images'))); //* manage images request as static to allow the images display
 app.use('/api/publications', publicationRoutes); //* middleware to be exectuted for publication manipulation 
-app.use('/api/auth', userRoutes); //* middleware to be executed for authentification
+app.use('/api/user', userRoutes); //* middleware to be executed for authentification
 
 //* export the application
 module.exports = app;

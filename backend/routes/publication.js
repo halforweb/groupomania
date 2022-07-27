@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 //* import authentification and image mgt middleware
-const auth = require('../middleware/auth');
+const auth = require('../middleware/auth-config');
 const multer = require('../middleware/multer-config');
 
 //* import the business logic for publication management and like feature

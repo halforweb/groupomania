@@ -1,18 +1,15 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import UseGlobalStyle from "./utils/GlobalStyle";
+import React from "react";
+import Routes from "./components/Routes";
+import { DataProvider } from "./components/AppContext";
 
-import Home from "./pages/Home.jsx";
-
-function App() {
-  return (
-    <Router>
-      <UseGlobalStyle />
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-      <UseGlobalStyle />
-    </Router>
+const App = () => {
+  
+return (
+    <div>
+      <DataProvider>
+      <Routes />
+      </DataProvider>
+    </div>
   );
 }
 

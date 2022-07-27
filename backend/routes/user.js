@@ -9,10 +9,17 @@ const pwdCtrl = require('../middleware/password');
 
 //* import the business logic for user management
 const userCtrl = require('../controllers/user');
+const logCtrl = require('../controllers/log');
 
-// * define the routes for each API endpoint
-router.post('/signup',pwdCtrl, userCtrl.signup);
-router.post('/login', userCtrl.login);
+// * define the routes for auth
+router.post('/signup',pwdCtrl, logCtrl.signup);
+router.post('/login', logCtrl.login);
+router.get("/logout", logCtrl.logout);
+
+// * define the routes for accessing users
+router.get("/", userCtrl.getAllUsers);
+router.get("/:id", userCtrl.getOneUser);
+router.delete("/delete/:id", userCtrl.deleteUser);
 
 // * export the router
 module.exports = router;
