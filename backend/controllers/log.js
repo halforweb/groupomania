@@ -12,6 +12,7 @@ exports.signup = (req, res, next) => {
         //* create a new user respecting the format of the database 
         .then(hash => {
             const user = new User({
+                pseudo:req.body.pseudo,
                 email: req.body.email,
                 password: hash
             });
@@ -24,9 +25,9 @@ exports.signup = (req, res, next) => {
 };
 
 //* create a const variable to generate a token
-const createToken = (id) => {
+const createToken = (userId) => {
     return jwt.sign(
-        { id },
+        { userId },
         process.env.TOKEN,
         { expiresIn: '24h' }
     )
@@ -47,7 +48,7 @@ exports.login = (req, res, next) => {
                     if (!valid) {
                         return res.status(401).json({ error: 'incorrect login/password' });
                     }
-                    //* the user exist, we creaate a token for the user and we create a cookie with the token inside
+                    //* the user exist, we creaate a token for the user and send the info in the res
                     const token = createToken(user._id);
                     res.status(200).json({
                         userId: user._id,

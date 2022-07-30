@@ -8,6 +8,7 @@ const SignUpForm = () => {
 
   //* Creation of 4 constant using the hook state
   const [formSubmit, setFormSubmit] = useState(false);
+  const [pseudo, setPseudo] = useState("");  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
@@ -46,6 +47,7 @@ const SignUpForm = () => {
         data: {
           email,
           password,
+          pseudo,
         },
       })
         .then((res) => {
@@ -57,7 +59,7 @@ const SignUpForm = () => {
           console.log(err);
           console.log(err.response.data.error);
           messageError.innerHTML = err.response.data.error;
-         
+
         });
     }
   };
@@ -74,6 +76,10 @@ const SignUpForm = () => {
         </>
       ) : (
         <form action="" onSubmit={handleRegister} id="sign-up-form">
+
+          <label htmlFor="pseudo">Pseudo</label>
+          <input type="text" name="pseudo" id="pseudo" onChange={(e) => setPseudo(e.target.value)} value={pseudo} />
+
           <label htmlFor="email">Email</label>
           <input type="text" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email} />
 

@@ -2,7 +2,6 @@
 const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
 
 //* import the routes related to publication and user 
 const publicationRoutes = require('./routes/publication');
@@ -32,7 +31,7 @@ app.use((req, res, next) => {
     //* allow all users to have access to the api
     res.setHeader('Access-Control-Allow-Origin', '*');
     //* allow to have specific headers to interact with the API
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, Accept-Language, Content-Language');
     //* allow to have specific methods to interact with the API
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
@@ -41,7 +40,6 @@ app.use((req, res, next) => {
 //* define the middleware functions to be applied on the application - Tech
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" })); //* secure headers allowing cross origin resource display
 app.use(express.json()); //* parse incoming request with json
-app.use(cookieParser()); //$ parse incoming cookie with CookieParser
 
 //* define the middleware functions to be applied on the application - Business Logic
 app.use('/images', express.static(path.join(__dirname, 'images'))); //* manage images request as static to allow the images display

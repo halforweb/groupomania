@@ -4,8 +4,9 @@ const express = require('express');
 //* creation of the router
 const router = express.Router();
 
-//* import the middleware the password checker
+//* import the middleware the password checker and the auth for routes related to the users access
 const pwdCtrl = require('../middleware/password');
+const auth = require('../middleware/auth-config');
 
 //* import the business logic for user management
 const userCtrl = require('../controllers/user');
@@ -17,9 +18,9 @@ router.post('/login', logCtrl.login);
 router.get("/logout", logCtrl.logout);
 
 // * define the routes for accessing users
-router.get("/", userCtrl.getAllUsers);
-router.get("/:id", userCtrl.getOneUser);
-router.delete("/delete/:id", userCtrl.deleteUser);
+router.get("/", auth, userCtrl.getAllUsers);
+router.get("/:id", auth, userCtrl.getOneUser);
+router.delete("/delete/:id", auth, userCtrl.deleteUser);
 
 // * export the router
 module.exports = router;

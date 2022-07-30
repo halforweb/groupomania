@@ -4,13 +4,14 @@ const User = require('../models/User');
 const ObjectID = require("mongoose").Types.ObjectId;
 
 //* define and export the getAllUsers function
-module.exports.getAllUsers = async (req, res) => {
-    const users = await User.find().select("-password");
-    res.status(200).json(users);
+module.exports.getAllUsers = (req, res, next) => {
+    User.find().select("-password")
+    .then(users => res.status(200).json(users))
+    .catch(error => res.status(400).json({ error }));
 };
 
 //* define and export the function allowing to get one user single user
-module.exports.getOneUser = (req, res) => {
+module.exports.getOneUser = (req, res, next) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send("ID unknown : " + req.params.id);
 

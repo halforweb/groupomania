@@ -4,12 +4,12 @@ const Publication = require('../models/publication');
 //* define and export the function allowing to manage likes
 exports.likePublication = (req, res, next) => {
     //* the user like the publication and his id is not in the DB
-    if (req.body.like === 1) {
+    if (req.body.like === 1 ) {
         Publication.updateOne(
             { _id: req.params.id },
             {
                 $inc: { likes: req.body.like++ },
-                $push: { usersLiked: req.body.userId },
+                $push: { usersLiked: req.auth.userId },
             }
         )
             .then(() => res.status(200).json({ message: "Publication liked" }))
@@ -21,7 +21,7 @@ exports.likePublication = (req, res, next) => {
             { _id: req.params.id },
             {
                 $inc: { dislikes: req.body.like++ * -1 },
-                $push: { usersDisliked: req.body.userId },
+                $push: { usersDisliked: req.auth.userId },
             }
         )
             .then(() => res.status(200).json({ message: "Publication disliked" }))
@@ -31,12 +31,12 @@ exports.likePublication = (req, res, next) => {
     else {
         Publication.findOne({ _id: req.params.id })
             .then((publication) => {
-                if (publication.usersLiked.includes(req.body.userId)) {
+                if (publication.usersLiked.includes(req.auth.userId)) {
                     Publication.updateOne(
                         { _id: req.params.id },
                         {
                             $inc: { likes: -1 },
-                            $pull: { usersLiked: req.body.userId }
+                            $pull: { usersLiked: req.auth.userId }
                         }
                     )
                         .then(() => res.status(200).json({ message: "Publication deleted" }))
@@ -48,7 +48,7 @@ exports.likePublication = (req, res, next) => {
                         { _id: req.params.id },
                         {
                             $inc: { dislikes: -1 },
-                            $pull: { usersDisliked: req.body.userId }
+                            $pull: { usersDisliked: req.auth.userId }
                         }
                     )
                         .then(() => res.status(200).json({ message: "Publication deleted" }))

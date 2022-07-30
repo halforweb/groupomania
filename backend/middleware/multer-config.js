@@ -22,4 +22,4 @@ const storage = multer.diskStorage({
 });
 
 //* export multer middleware with storage defined through the storage constant, taking into account the image files only
-module.exports = multer({ storage: storage }).single('image');
+module.exports = multer({ storage: storage }).single('file');
