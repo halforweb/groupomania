@@ -35,11 +35,8 @@ exports.createPublication = (req, res, next) => {
 exports.modifyOnePublication = (req, res, next) => {
     Publication.findOne({ _id: req.params.id }) //* looking for the publication
         .then((publication) => {
-            //* check the userId from the request is equal to the one in the DB
-            if (publication.userId != req.auth.userId) {
-                res.status(403).json({ error: 'Not authorized' });
-            }
-            else if (publication.userId == req.auth.userId) {
+            //* check the userId from the request is equal to the one in the DB or an admin
+            if (publication.userId == req.auth.userId || req.auth.role === "admin") {
                 //* We check if there is a file
                 if (req.file) {
                     const filename = publication.imageUrl.split("/images/")[1];
@@ -56,17 +53,15 @@ exports.modifyOnePublication = (req, res, next) => {
                             .catch(error => res.status(401).json({ error }));
                     });
                     //* if no file, we just update the publication with the body
-                } else { 
+                } else {
                     //* update the publication with new infos
-                    Publication.updateOne({ _id: req.params.id }, { ...req.body }, { upsert: true })
-                    .then(() => res.status(200).json({ message: 'Publication updated successfully!' }))
-                    .catch(error => res.status(401).json({ error }));
-
+                    Publication.updateOne({ _id: req.params.id }, {$set:{message:req.body.message}}, { upsert: true })
+                        .then(() => res.status(200).json({ message: 'Publication updated successfully!' }))
+                        .catch(error => res.status(401).json({ error }));
                 }
-
+            } else {
+                res.status(403).json({ error: 'Not authorized' });
             }
-
-
         })
         .catch((error) => {
             res.status(400).json({ error });
@@ -78,10 +73,8 @@ exports.modifyOnePublication = (req, res, next) => {
 exports.deleteOnePublication = (req, res, next) => {
     Publication.findOne({ _id: req.params.id }) //* looking for the publication
         .then(publication => {
-            //* check the userId from the request is equal to the one in the DB
-            if (publication.userId != req.auth.userId) {
-                res.status(401).json({ message: 'Not authorized' });
-            } else {
+            //* check the userId from the request is equal to the one in the DB or an admin
+            if (publication.userId = req.auth.userId || req.auth.role === "admin") {
                 //* get the image 
                 const filename = publication.imageUrl.split('/images/')[1];
                 //* delete the image from the folder images and the record in the database related to the publication with relevant id selected
@@ -90,6 +83,9 @@ exports.deleteOnePublication = (req, res, next) => {
                         .then(() => { res.status(200).json({ message: 'Publication deleted successfully !' }) })
                         .catch(error => res.status(401).json({ error }));
                 });
+
+            } else {
+                res.status(401).json({ message: 'Not authorized' });
             }
         })
         .catch(error => {

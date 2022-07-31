@@ -10,8 +10,10 @@ module.exports = (req, res, next) => {
 
         //* get the user id from the decoded token and execute the authentification
         const userId = decodedToken.userId;
+        const role = decodedToken.role
         req.auth = {
-            userId: userId
+            userId: userId,
+            role: role
         };
         next();
     } catch (error) {

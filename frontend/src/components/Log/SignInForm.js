@@ -18,7 +18,7 @@ const SignInForm = () => {
     const messageError = document.querySelector('.message-error');
     messageError.innerHTML = "";
 
-    
+
     //* call API to post the infos (id and pass) from the frontend to the backend
     axios({
       method: "post",
@@ -28,23 +28,23 @@ const SignInForm = () => {
         password,
       },
     })
-    //* Save the Token and ID in the local storage before redirection to the home page
+      //* Save the Token and ID in the local storage before redirection to the home page
       .then((res) => {
         console.log(res)
         localStorage.setItem("token", "Bearer " + res.data.token);
         localStorage.setItem("id", res.data.userId);
+        localStorage.setItem("role", res.data.role);
         window.location = "/home";
-        
       })
+      //* We catch the issue and display the message in the screen
       .catch((err) => {
-        console.log(err);
         console.log(err.response.data.error);
         messageError.innerHTML = err.response.data.error;
       });
   }
 
   return (
-    //* On each label, we keep the value e written by the user and we change the state of our constants by assigning a value to the constant
+    //* On each label, we keep the value e written by the user and we change the state of our constants by assigning them a value
     <form action="" onSubmit={handleLogin} id="sign-in-form">
       <label htmlFor="email">Email</label>
       <input type="text" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email} />

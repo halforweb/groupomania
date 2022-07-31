@@ -13,7 +13,7 @@ const userCtrl = require('../controllers/user');
 const logCtrl = require('../controllers/log');
 
 // * define the routes for auth
-router.post('/signup',pwdCtrl, logCtrl.signup);
+router.post('/signup', pwdCtrl, logCtrl.signup);
 router.post('/login', logCtrl.login);
 router.get("/logout", logCtrl.logout);
 

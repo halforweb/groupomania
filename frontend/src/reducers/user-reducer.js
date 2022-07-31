@@ -1,13 +1,13 @@
-//* we import the data from the actions defined 
-import {GET_USER} from "../actions/user-actions";
+//* We import the actions related to the user 
+import { GET_USER } from "../actions/user-actions";
 
 //* We initialise the user reducer state to null
 const initialState = {};
 
-//* we export a function userReducer with a null initial state and actions
+//* we define and export each reducer with the new state thanks to the payload we catched from the action
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    //* If we ask for GET_USER, we update the state of the userReducer with the data of the payload
+    //* We update the state of the userReducer with the data of the payload
     case GET_USER:
       return action.payload;
     default:

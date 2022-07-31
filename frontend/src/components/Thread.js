@@ -8,7 +8,7 @@ import '../styles/thread.css';
 
 const Thread = () => {
 
-  //* We define the constant with a state 
+  //* We get the posts with their last state from the redux store
   const posts = useSelector((state) => state.postReducer);
 
   //* We dispatch the action getPost to have posts

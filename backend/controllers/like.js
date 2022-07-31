@@ -4,7 +4,7 @@ const Publication = require('../models/publication');
 //* define and export the function allowing to manage likes
 exports.likePublication = (req, res, next) => {
     //* the user like the publication and his id is not in the DB
-    if (req.body.like === 1 ) {
+    if (req.body.like === 1) {
         Publication.updateOne(
             { _id: req.params.id },
             {

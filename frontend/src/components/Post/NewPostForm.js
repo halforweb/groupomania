@@ -13,13 +13,14 @@ const NewPostForm = () => {
     const [message, setMessage] = useState("");
     const [postPicture, setPostPicture] = useState(null);
     const [file, setFile] = useState();
+
+    //* get the data from the store and define the dispatch function
     const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
 
     //* Creation the function to handle the newpost button and push the info in the backend
     const handlePost = async () => {
         //* set up the data needed to create the post if we have picture and message 
-        console.log(userData);
         if (message && postPicture) {
             const data = new FormData();
             data.append('userId', userData._id);
@@ -36,7 +37,6 @@ const NewPostForm = () => {
         } else {
             alert("Veuillez entrer un message et une image")
         }
-
     };
 
     //* Creation the function to handle the image display and the set up a state to the File constant
@@ -70,7 +70,7 @@ const NewPostForm = () => {
                                 <div className="pseudo">
                                     <h3>{userData.pseudo}</h3>
                                 </div>
-                                <span>TimeStamp</span>
+                                <span></span>
                             </div>
                             <div className="content">
                                 <p className="content-p">{message} </p>

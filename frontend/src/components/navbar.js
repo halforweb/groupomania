@@ -7,9 +7,9 @@ import mainLogo from "../assets/main_logo.png";
 
 
 const Navbar = () => {
-
+    //* We get the userData from the redux store 
     const userData = useSelector((state) => state.userReducer);
-
+    
     return (
         <nav>
             <div className="nav-container">
@@ -21,7 +21,7 @@ const Navbar = () => {
                     </NavLink>
                 </div>
                 <div className="welcome">
-                    <h5>Bienvenue sur l'intranet {userData.pseudo}</h5>
+                    <h5>Bienvenue {userData.pseudo}</h5>
                 </div>
                 <div className="logout">
                   <Logout/>

@@ -13,7 +13,6 @@ nav {
     height: 120px;
     align-items: center;
     border-bottom: 1px solid #FFF;
-  
 }
 
 h5 {
@@ -29,4 +28,35 @@ h5 {
 .logo-navbar-image {
     height: 120px;
     width: 120px;
+}
+
+/* Smartphones */
+@media all and (max-width: 768px) {
+    
+    h5 {
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    .logo_navbar {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo-navbar-image {
+        height: 90px;
+        width: 90px;
+    }
+
+    .logout{
+       
+        text-align: center;
+    }
+
+    .logout-link{
+        text-align: center;
+        font-size: 1rem;
+        text-align: center;
+    }
+
 }

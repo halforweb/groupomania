@@ -12,7 +12,7 @@ exports.signup = (req, res, next) => {
         //* create a new user respecting the format of the database 
         .then(hash => {
             const user = new User({
-                pseudo:req.body.pseudo,
+                pseudo: req.body.pseudo,
                 email: req.body.email,
                 password: hash
             });
@@ -25,10 +25,11 @@ exports.signup = (req, res, next) => {
 };
 
 //* create a const variable to generate a token
-const createToken = (userId) => {
+const createToken = (userId, role) => {
     return jwt.sign(
-        { userId },
+        { userId, role },
         process.env.TOKEN,
+
         { expiresIn: '24h' }
     )
 };
@@ -49,9 +50,10 @@ exports.login = (req, res, next) => {
                         return res.status(401).json({ error: 'incorrect login/password' });
                     }
                     //* the user exist, we creaate a token for the user and send the info in the res
-                    const token = createToken(user._id);
+                    const token = createToken(user._id, user.role);
                     res.status(200).json({
                         userId: user._id,
+                        role: user.role,
                         token,
                     });
                 })
@@ -63,5 +65,5 @@ exports.login = (req, res, next) => {
 //* define and export the logout function
 exports.logout = (req, res, next) => {
     res.status(200).json({ message: 'Logged out successfully!' });
-    
-  }
+
+}

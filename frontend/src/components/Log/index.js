@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import '../../styles/log.css';
 
+//* we import the two components related to the log page
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 
@@ -34,7 +35,6 @@ const Log = (props) => {
                         className={signUpModal ? "active-btn" : null}
                     >
                         S'inscrire
-
                     </div>
 
                     <div

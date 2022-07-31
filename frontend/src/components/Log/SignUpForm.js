@@ -8,7 +8,7 @@ const SignUpForm = () => {
 
   //* Creation of 4 constant using the hook state
   const [formSubmit, setFormSubmit] = useState(false);
-  const [pseudo, setPseudo] = useState("");  
+  const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
@@ -30,7 +30,7 @@ const SignUpForm = () => {
     termsError.innerHTML = "";
     messageError.innerHTML = "";
 
-    //* test the coherence of the password and the terms clicked from the frontend
+    //* Test the coherence of the password and the terms clicked from the frontend
     if (password !== controlPassword || !terms.checked) {
       if (password !== controlPassword)
         passwordConfirmError.innerHTML =
@@ -55,8 +55,8 @@ const SignUpForm = () => {
           setFormSubmit(true);
 
         })
+        //* We catch the issue and display the message in the screen
         .catch((err) => {
-          console.log(err);
           console.log(err.response.data.error);
           messageError.innerHTML = err.response.data.error;
 
@@ -64,8 +64,8 @@ const SignUpForm = () => {
     }
   };
 
-  //* We check if the form has been submitted to redirect to login modal. Else we let the user create his credentials. 
-  //* On each label, we keep the value e written by the user and we change the state of our constants by assigning a value to the constant
+  //* We check if the form has been submitted to redirect to login form. Else we let the user create his credentials. 
+  //* On each label, we keep the value e written by the user and we change the state of our constants by assigning them a value
   return (
     <>
       {formSubmit ? (

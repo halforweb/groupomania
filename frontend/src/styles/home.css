@@ -5,3 +5,12 @@
     flex-direction: column;
     gap: 20px;
 }
+
+/* Smartphones */
+@media all and (max-width: 768px) {
+    
+    .home {
+        width: 90%;
+
+    }
+}
