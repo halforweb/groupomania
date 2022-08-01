@@ -29,7 +29,6 @@ const Card = ({ post }) => {
         //* We form the data to push in the dispatch
         if (textUpdate || fileUpdate) {
             const data = new FormData();
-            data.append('userId', userData._id);
             data.append('postId', post._id);
             if (textUpdate) data.append('message', textUpdate);
             if (fileUpdate) data.append("file", fileUpdate);
